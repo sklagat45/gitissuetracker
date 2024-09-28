@@ -1,4 +1,4 @@
-###GitIssueTracker
+### GitIssueTracker
 
 Introduction 
 ----
