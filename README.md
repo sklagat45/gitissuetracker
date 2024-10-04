@@ -14,6 +14,7 @@ Building a GITHUB ISSUE TRACKER mobile app using Kotlin and Jetpack Compose.
 * [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
 * [Flow](https://kotlinlang.org/docs/reference/coroutines/flow.html)
 * [KOIN Dependency](https://insert-koin.io/)
+* [GraphQL](https://graphql.org/)
 * [Retrofit](https://square.github.io/retrofit/)
   * [Jetpack](https://developer.android.com/jetpack)
     * [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle)
