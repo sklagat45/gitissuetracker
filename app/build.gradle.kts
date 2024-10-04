@@ -72,9 +72,6 @@ dependencies {
 
     //apollo
     implementation(libs.apollo.api)
-//    implementation(libs.apollo.runtime)
-//    implementation(libs.apollo.normalized.cache.sqlite)
-
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(platform(libs.okhttp.bom))
     implementation(libs.okhttp)
@@ -114,15 +111,16 @@ dependencies {
     // Retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
-//    implementation(libs.okhttp3.okhttp)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
-//    implementation(libs.okhttp3.logging.interceptor)
 
     implementation(platform(libs.okhttp.bom))
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1")
+    implementation(libs.kotlinx.serialization.json)
+    // tests
+    testImplementation (libs.mockito.core)
+    testImplementation (libs.kotlinx.coroutines.test)
 
 
 

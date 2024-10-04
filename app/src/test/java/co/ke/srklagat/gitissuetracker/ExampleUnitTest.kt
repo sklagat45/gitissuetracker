@@ -1,17 +1,18 @@
 package co.ke.srklagat.gitissuetracker
 
+import co.ke.srklagat.gitissuetracker.utils.DateUtil
 import org.junit.Test
-
 import org.junit.Assert.*
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
 class ExampleUnitTest {
+
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun testDateFormatting() {
+        val inputDate = "2024-10-04T00:00:00Z"
+        val expectedFormattedDate = "04 Oct 2024, 12:00 AM"
+
+        val actualFormattedDate = DateUtil(inputDate)
+
+        assertEquals(expectedFormattedDate, actualFormattedDate)
     }
 }
