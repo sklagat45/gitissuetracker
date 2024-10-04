@@ -5,8 +5,14 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "issues")
 data class IssueEntity(
-    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    @PrimaryKey(autoGenerate = true) val id: Long,
     val title: String,
     val url: String,
-    val labels: String
+    val labels: String,
+    val createdAt: String,
+    val assignedTo: String,
+    val status: String,
+    val description: String,
+    val comments: String
 )
+

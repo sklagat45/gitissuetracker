@@ -21,7 +21,7 @@ fun IssueTrackerHome(issueFlow: Flow<List<IssueEntity>>) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFe6eef2)) // Set background color here
+            .background(Color(0xFFFFFFFF))
             .padding(8.dp)
     ) {
         TopSection()

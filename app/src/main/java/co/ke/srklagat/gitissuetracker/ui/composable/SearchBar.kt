@@ -30,7 +30,7 @@ fun SearchBar() {
         },
         shape = RoundedCornerShape(50),
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            Color(0xFFF2F2F2)
+            containerColor = Color(0xFFECF3F9),
         )
     )
 }

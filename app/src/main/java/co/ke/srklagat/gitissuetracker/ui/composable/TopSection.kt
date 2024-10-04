@@ -1,11 +1,6 @@
 package co.ke.srklagat.gitissuetracker.ui.composable
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
@@ -22,7 +17,6 @@ import java.time.format.DateTimeFormatter
 
 @Composable
 fun TopSection() {
-    // Get today's date
     val today = LocalDate.now()
     val formatter = DateTimeFormatter.ofPattern("EEEE, d MMMM")
     val formattedDate = today.format(formatter)
@@ -30,7 +24,7 @@ fun TopSection() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 16.dp),
+            .padding(start = 16.dp, end = 16.dp, top = 50.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {

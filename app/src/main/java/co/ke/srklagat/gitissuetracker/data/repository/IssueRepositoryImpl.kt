@@ -17,50 +17,72 @@ class IssueRepositoryImpl(
     private val graphQLService: GraphQLService,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : IssueRepository {
-
     override suspend fun fetchIssues() = withContext(ioDispatcher) {
         val query = """
-        {
-          repository(owner: "sklagat45", name: "cashBackTestApp") {
-            issues(last: 20, states: OPEN) {
-              edges {
-                node {
-                  title
-                  url
-                  labels(first: 10) {
-                    edges {
-                      node {
-                        name
-                      }
-                    }
+    {
+      repository(owner: "sklagat45", name: "cashBackTestApp") {
+        issues(last: 20) {
+          edges {
+            node {
+              title
+              url
+              state
+              createdAt
+              body
+              assignees(first: 5) {
+                edges {
+                  node {
+                    name
+                  }
+                }
+              }
+              comments(last: 5) {
+                edges {
+                  node {
+                    bodyText
                   }
                 }
               }
             }
           }
         }
+      }
+    }
     """.trimIndent()
 
         val responseJson = graphQLService.fetchIssues(query)
 
+        // Map the fetched data into `IssueEntity` objects
         val fetchedIssues = responseJson?.let { json ->
             val jsonObject = Json.parseToJsonElement(json).jsonObject
             jsonObject["data"]?.jsonObject?.get("repository")?.jsonObject?.get("issues")?.jsonObject?.get(
                 "edges"
             )?.jsonArray?.map {
                 val node = it.jsonObject["node"]?.jsonObject
+                val assignees = node?.get("assignees")?.jsonObject?.get("edges")?.jsonArray?.joinToString(", ") { assigneeEdge ->
+                    assigneeEdge.jsonObject["node"]?.jsonObject?.get("name")?.toString()?.trim('"') ?: "Unassigned"
+                } ?: "Unassigned"
+
+                val comments = node?.get("comments")?.jsonObject?.get("edges")?.jsonArray?.joinToString("\n") { commentEdge ->
+                    commentEdge.jsonObject["node"]?.jsonObject?.get("bodyText")?.toString()?.trim('"') ?: ""
+                } ?: "No comments"
+
                 IssueEntity(
+                    id = 0,
                     title = node?.get("title")?.toString()?.trim('"') ?: "",
                     url = node?.get("url")?.toString()?.trim('"') ?: "",
-                    labels = node?.get("labels")?.jsonObject?.get("edges")?.jsonArray?.joinToString(
-                        ", "
-                    ) { labelEdge ->
-                        labelEdge.jsonObject["node"]?.jsonObject?.get("name")?.toString()?.trim('"')
-                            ?: ""
-                    } ?: ""
+                    labels = node?.get("labels")?.jsonObject?.get("edges")?.jsonArray?.joinToString(", ") { labelEdge ->
+                        labelEdge.jsonObject["node"]?.jsonObject?.get("name")?.toString()?.trim('"') ?: ""
+                    } ?: "",
+                    createdAt = node?.get("createdAt")?.toString()?.trim('"') ?: "",
+                    assignedTo = assignees,
+                    status = node?.get("state")?.toString()?.trim('"') ?: "",
+                    description = node?.get("body")?.toString()?.trim('"') ?: "",
+                    comments = comments
                 )
             } ?: emptyList()
         } ?: emptyList()
+
         Timber.d("Fetched Issues: $fetchedIssues")
         issueDao.insertAsync(fetchedIssues)
     }

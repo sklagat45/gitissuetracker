@@ -16,8 +16,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-// Define the custom color
-val CustomBlue = Color(0xFF4E7B9C) // Using the color hex code
+val CustomBlue = Color(0xFF4E7B9C)
 
 @Composable
 fun FilterSection() {
@@ -27,21 +26,19 @@ fun FilterSection() {
             .padding(vertical = 16.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        // Date Dropdown
         DropdownWithIcon(
             label = "Date",
             icon = Icons.Default.DateRange,
             items = listOf("Today", "This Week", "This Month", "This Year"),
-            onItemSelected = { selectedDate -> /* Handle date selection */ },
-            modifier = Modifier.width(80.dp) // Limit the width of the dropdown
+            onItemSelected = { selectedDate -> },
+            modifier = Modifier.width(80.dp)
         )
 
-        // Filter by Dropdown
         DropdownWithIcon(
             label = "Filter by",
             icon = Icons.Default.ArrowDropDown,
             items = listOf("Open", "Closed", "In Progress"),
-            onItemSelected = { selectedFilter -> /* Handle filter selection */ },
+            onItemSelected = { selectedFilter -> },
             modifier = Modifier.width(80.dp)
         )
 
@@ -49,24 +46,22 @@ fun FilterSection() {
             onClick = { /* TODO */ },
             modifier = Modifier
                 .width(80.dp)
-//                .height(45.dp)
                 .padding(horizontal = 4.dp),
             colors = ButtonDefaults.buttonColors(Color.White),
             elevation = ButtonDefaults.elevatedButtonElevation(0.dp)
         ) {
-            Text("iOS", color = CustomBlue)
+            Text("iOS", color = CustomBlue, fontSize = 14.sp)
         }
 
         Button(
             onClick = { /* TODO */ },
             modifier = Modifier
                 .width(80.dp)
-//                .height(45.dp)
                 .padding(horizontal = 4.dp),
             colors = ButtonDefaults.buttonColors(Color.White),
             elevation = ButtonDefaults.elevatedButtonElevation(0.dp)
         ) {
-            Text("Xcode", color = CustomBlue)
+            Text("Xcode", color = CustomBlue, fontSize = 14.sp)
         }
     }
 }
@@ -77,12 +72,12 @@ fun DropdownWithIcon(
     icon: ImageVector,
     items: List<String>,
     onItemSelected: (String) -> Unit,
-    modifier: Modifier = Modifier // Add modifier parameter
+    modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
-    var selectedItem by remember { mutableStateOf(items[0]) } // Default to the first item
+    var selectedItem by remember { mutableStateOf(items[0]) }
 
-    Box(modifier = modifier.padding(horizontal = 2.dp)) { // Use the modifier here
+    Box(modifier = modifier.padding(horizontal = 2.dp)) {
         Row(
             modifier = Modifier
                 .clickable(onClick = { expanded = true })
@@ -93,7 +88,7 @@ fun DropdownWithIcon(
         ) {
             Icon(imageVector = icon, contentDescription = null, modifier = Modifier.size(24.dp), tint = CustomBlue) // Change icon color to custom blue
             Spacer(modifier = Modifier.width(3.dp))
-            Text(text = selectedItem, color = CustomBlue, fontSize = 9.sp) // Change text color to custom blue
+            Text(text = selectedItem, color = CustomBlue, fontSize = 14.sp)
         }
 
         DropdownMenu(
@@ -104,7 +99,7 @@ fun DropdownWithIcon(
             items.forEach { item ->
                 DropdownMenuItem(
                     text = {
-                        Text(text = item, fontSize = 9.sp, color = CustomBlue) // Change text color to custom blue
+                        Text(text = item, fontSize = 12.sp, color = CustomBlue) // Set font size to 12 sp
                     },
                     onClick = {
                         selectedItem = item
