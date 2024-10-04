@@ -22,6 +22,8 @@ class MainActivity : ComponentActivity() {
             GitIssueTrackerTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { paddingValues ->
                     val viewModel: IssuesViewModel = getViewModel()
+                    viewModel.fetchRemoteIssues()
+
                     val issuesFlow = viewModel.issues
                     IssueTrackerHome(issueFlow = issuesFlow)
                 }

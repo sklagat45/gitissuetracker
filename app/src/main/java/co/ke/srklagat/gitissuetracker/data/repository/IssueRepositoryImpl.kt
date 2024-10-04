@@ -10,6 +10,7 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
+import timber.log.Timber
 
 class IssueRepositoryImpl(
     private val issueDao: IssueDao,
@@ -49,7 +50,6 @@ class IssueRepositoryImpl(
             )?.jsonArray?.map {
                 val node = it.jsonObject["node"]?.jsonObject
                 IssueEntity(
-                    id = 0,
                     title = node?.get("title")?.toString()?.trim('"') ?: "",
                     url = node?.get("url")?.toString()?.trim('"') ?: "",
                     labels = node?.get("labels")?.jsonObject?.get("edges")?.jsonArray?.joinToString(
@@ -61,7 +61,7 @@ class IssueRepositoryImpl(
                 )
             } ?: emptyList()
         } ?: emptyList()
-
+        Timber.d("Fetched Issues: $fetchedIssues")
         issueDao.insertAsync(fetchedIssues)
     }
 

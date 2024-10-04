@@ -21,7 +21,7 @@ fun IssueList(issues: List<IssueEntity>) {
                 author = "",
                 comments = 0
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(4.dp))
         }
     }
 }

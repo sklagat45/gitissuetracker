@@ -22,7 +22,7 @@ class IssuesViewModel(
         getLocalIssues()
     }
 
-    private fun fetchRemoteIssues() {
+     fun fetchRemoteIssues() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 issueRepository.fetchIssues()
@@ -33,7 +33,7 @@ class IssuesViewModel(
         }
     }
 
-    private fun getLocalIssues() {
+     fun getLocalIssues() {
         viewModelScope.launch {
             issueRepository.getLocalIssues().collect { localIssues ->
                 _issues.value = localIssues

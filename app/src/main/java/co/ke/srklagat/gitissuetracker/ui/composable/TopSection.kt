@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,10 +17,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun TopSection() {
+    // Get today's date
+    val today = LocalDate.now()
+    val formatter = DateTimeFormatter.ofPattern("EEEE, d MMMM")
+    val formattedDate = today.format(formatter)
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -30,11 +36,11 @@ fun TopSection() {
     ) {
         Column {
             Text("Today", fontSize = 28.sp, fontWeight = FontWeight.Bold)
-            Text("Tuesday, 21 November", color = Color.Gray, fontSize = 16.sp)
+            Text(formattedDate, color = Color.Gray, fontSize = 16.sp)
         }
 
         Icon(
-            imageVector = Icons.Default.Search,
+            imageVector = Icons.Default.Settings,
             contentDescription = "Settings",
             modifier = Modifier.size(24.dp)
         )

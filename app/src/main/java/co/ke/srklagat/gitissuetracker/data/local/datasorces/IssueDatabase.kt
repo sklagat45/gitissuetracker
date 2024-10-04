@@ -11,7 +11,7 @@ import co.ke.srklagat.gitissuetracker.data.local.models.IssueEntity
 
 @Database(
     entities = [IssueEntity::class],
-    version = 3
+    version = 4
 
 )
 @RewriteQueriesToDropUnusedColumns
