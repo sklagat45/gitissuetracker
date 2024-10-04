@@ -41,11 +41,10 @@ Include screenshots of your app here to showcase the UI and functionality. This 
 
 ### Screenshots
 
-1. **Home Screen**
-   ![Home Screen](app/screenshots/screen_home.jpeg)
-
-2. **Dropdown Screen**
-   ![Dropdown Screen](app/screenshots/screen_dropdown.jpeg)
+<p align="center">
+  <img src="app/screenshots/screen_home.jpeg" alt="Home Screen" width="300"/>
+  <img src="app/screenshots/screen_dropdown.jpeg" alt="Dropdown Screen" width="300"/>
+</p>
 
 
 ---
