@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-kapt")
+    kotlin("plugin.serialization") version "2.0.20"
 }
 
 android {
@@ -68,7 +69,12 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+
+    //apollo
     implementation(libs.apollo.api)
+//    implementation(libs.apollo.runtime)
+//    implementation(libs.apollo.normalized.cache.sqlite)
+
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(platform(libs.okhttp.bom))
     implementation(libs.okhttp)
@@ -99,5 +105,25 @@ dependencies {
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui)
     implementation(libs.androidx.navigation.compose)
+
+    // Room for local database
+    implementation (libs.androidx.room.runtime)
+    kapt (libs.androidx.room.compiler)
+    implementation (libs.androidx.room.ktx)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+//    implementation(libs.okhttp3.okhttp)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+//    implementation(libs.okhttp3.logging.interceptor)
+
+    implementation(platform(libs.okhttp.bom))
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1")
+
+
 
 }
